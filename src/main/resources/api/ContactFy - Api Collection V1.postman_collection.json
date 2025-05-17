@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "cc8332df-77f1-4103-aeba-153a89d853b4",
+		"name": "ContactFy - Api Collection V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17183901"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\",\n    \"email\":  \"username@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username\",\n    \"password\": \"new-password\",\n    \"currentPassword\": \"password\",\n    \"email\":  \"username@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/user/4b7ef790-f53b-4e56-8002-0a7f99a4f69d",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"4b7ef790-f53b-4e56-8002-0a7f99a4f69d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/user/48baf0b2-28a4-43d2-aac1-936799f1bfce",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"48baf0b2-28a4-43d2-aac1-936799f1bfce"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTHENTICATION",
+			"item": [
+				{
+					"name": "AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"if (response.content && response.content.token) {",
+									"    let token = response.content.token;",
+									"    pm.globals.set(\"TOKEN_CONTACTFY\", token);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"username\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CONTACT",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Maria Oliveira\",\n  \"email\": \"maria.oliveira@example.com\",\n  \"cellphone\": 11922334455,\n  \"phone\": \"11922334455\",\n  \"favorite\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "pt-br"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nome Atualizado\",\n    \"email\": \"novoemail@example.com\",\n    \"cellphone\": \"11940402020\",\n    \"phone\": \"11934402020\",\n    \"favorite\": false,\n    \"active\": true\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contact/2a46c25e-3c72-4def-bd60-c69663c796c1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"2a46c25e-3c72-4def-bd60-c69663c796c1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UNFAVORITE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact/unfavorite/51a0e531-7a6c-4f5f-a72e-760ccce48606",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"unfavorite",
+								"51a0e531-7a6c-4f5f-a72e-760ccce48606"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FAVORITE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact/favorite/51a0e531-7a6c-4f5f-a72e-760ccce48606",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"favorite",
+								"51a0e531-7a6c-4f5f-a72e-760ccce48606"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INACTIVATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact/inactivate/51a0e531-7a6c-4f5f-a72e-760ccce48606",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"inactivate",
+								"51a0e531-7a6c-4f5f-a72e-760ccce48606"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACTIVATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact/activate/51a0e531-7a6c-4f5f-a72e-760ccce48606",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"activate",
+								"51a0e531-7a6c-4f5f-a72e-760ccce48606"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_CONTACTFY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt-br",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/contact/51a0e531-7a6c-4f5f-a72e-760ccce48606",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"contact",
+								"51a0e531-7a6c-4f5f-a72e-760ccce48606"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

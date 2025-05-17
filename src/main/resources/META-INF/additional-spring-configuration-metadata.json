@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "The secret key used for JWT authentication."
+  },
+  {
+    "name": "jwt.expiration",
+    "type": "java.lang.String",
+    "description": "The expiration time in ms for JWT tokens."
+  },
+  {
+    "name": "api.version",
+    "type": "java.lang.String",
+    "description": "The version of the API."
+  }
+]}
