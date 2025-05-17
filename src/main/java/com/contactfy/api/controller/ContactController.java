@@ -45,12 +45,12 @@ public class ContactController {
     @PostMapping
     public ResponseEntity<ApiResponse<ContactDTO>> createContact(@RequestBody ContactDTO contactDTO, Authentication authentication) {
         
-	ApiResponse<ContactDTO> task = contactService.createContact(authentication.getName(), contactDTO);
-	return new ResponseEntity<>(task, task.getStatus());
+	ApiResponse<ContactDTO> contact = contactService.createContact(authentication.getName(), contactDTO);
+	return new ResponseEntity<>(contact, contact.getStatus());
     }
     
     @PutMapping("/{identifier}")
-    public ResponseEntity<ApiResponse<ContactDTO>> updateTask(@PathVariable String identifier, @RequestBody ContactDTO contactDTO,
+    public ResponseEntity<ApiResponse<ContactDTO>> updateContact(@PathVariable String identifier, @RequestBody ContactDTO contactDTO,
 	    Authentication authentication) {
 
 	ApiResponse<ContactDTO> response = contactService.updateContact(authentication.getName(), identifier, contactDTO);
@@ -61,29 +61,29 @@ public class ContactController {
     @PatchMapping(path = "/inactivate/{identifier}")
     public ResponseEntity<ApiResponse<ContactDTO>> inactivateContact(@PathVariable String identifier, Authentication authentication) {
         
-	ApiResponse<ContactDTO> task = contactService.inactivateContact(authentication.getName(), identifier);
-	return new ResponseEntity<>(task, task.getStatus());
+	ApiResponse<ContactDTO> contact = contactService.inactivateContact(authentication.getName(), identifier);
+	return new ResponseEntity<>(contact, contact.getStatus());
     }
     
     @PatchMapping(path = "/activate/{identifier}")
     public ResponseEntity<ApiResponse<ContactDTO>> activateContact(@PathVariable String identifier, Authentication authentication) {
         
-	ApiResponse<ContactDTO> task = contactService.activateContact(authentication.getName(), identifier);
-	return new ResponseEntity<>(task, task.getStatus());
+	ApiResponse<ContactDTO> contact = contactService.activateContact(authentication.getName(), identifier);
+	return new ResponseEntity<>(contact, contact.getStatus());
     }
     
     @PatchMapping(path = "/unfavorite/{identifier}")
     public ResponseEntity<ApiResponse<ContactDTO>> unfavoriteContact(@PathVariable String identifier, Authentication authentication) {
         
-	ApiResponse<ContactDTO> task = contactService.unfavoriteContact(authentication.getName(), identifier);
-	return new ResponseEntity<>(task, task.getStatus());
+	ApiResponse<ContactDTO> contact = contactService.unfavoriteContact(authentication.getName(), identifier);
+	return new ResponseEntity<>(contact, contact.getStatus());
     }
     
     @PatchMapping(path = "/favorite/{identifier}")
     public ResponseEntity<ApiResponse<ContactDTO>> favoriteContact(@PathVariable String identifier, Authentication authentication) {
         
-	ApiResponse<ContactDTO> task = contactService.favoriteContact(authentication.getName(), identifier);
-	return new ResponseEntity<>(task, task.getStatus());
+	ApiResponse<ContactDTO> contact = contactService.favoriteContact(authentication.getName(), identifier);
+	return new ResponseEntity<>(contact, contact.getStatus());
     }
 
 }

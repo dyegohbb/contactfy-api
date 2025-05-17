@@ -20,9 +20,9 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("BeeTasky API Specifications")
+                        .title("Contactfy API Specifications")
                         .version(apiVersion)
-                        .description("Task Management System"))
+                        .description("Telephone Scheduling System"))
                 .components(new Components()
                         .addSecuritySchemes("BearerAuth", new SecurityScheme()
                                 .name("BearerAuth")
