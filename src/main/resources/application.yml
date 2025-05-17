@@ -1,0 +1,26 @@
+server:
+  port: ${CONTACTFY_SERVER_PORT:8080}
+
+spring:
+  application:
+    name: contactfy-api
+  datasource:
+    driver-class-name: ${CONTACTFY_DB_DRIVER_CLASS_NAME:org.postgresql.Driver}
+    url: ${CONTACTFY_DB_URL:jdbc:postgresql://localhost:5432/contactfy?currentSchema=desafio}
+    username: ${CONTACTFY_DB_USERNAME:root}
+    password: ${CONTACTFY_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: ${CONTACTFY_JPA_SHOW_SQL:false}
+
+logging:
+  level:
+    root: ERROR
+    org:
+      hibernate: ${CONTACTFY_HIBERNATE_LOG_LEVEL:WARN}
+      springframework:
+        web: ${CONTACTFY_SPRING_WEB_LOG_LEVEL:WARN}
+        security: ${CONTACTFY_SPRING_SECURITY_LEVEL:WARN}
+    com:
+      contactfy: INFO
