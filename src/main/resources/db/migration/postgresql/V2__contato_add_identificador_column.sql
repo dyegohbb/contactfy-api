@@ -1,0 +1,2 @@
+ALTER TABLE desafio.contato
+ADD COLUMN IF NOT EXISTS identificador VARCHAR(50) NOT NULL UNIQUE;
