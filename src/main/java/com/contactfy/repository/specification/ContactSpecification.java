@@ -16,48 +16,48 @@ import jakarta.persistence.criteria.Predicate;
 public class ContactSpecification {
 
     public Specification<Contact> filter(final ContactFilterDTO filter, final String userIdentifier) {
-        return (root, query, cb) -> {
-            final List<Predicate> predicates = new ArrayList<>();
+	return (root, query, cb) -> {
+	    final List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.isNotBlank(filter.identifier())) {
-                predicates.add(cb.equal(root.get("identifier"), filter.identifier()));
-            }
+	    if (StringUtils.isNotBlank(filter.identifier())) {
+		predicates.add(cb.equal(root.get("identifier"), filter.identifier()));
+	    }
 
-            if (StringUtils.isNotBlank(filter.name())) {
-                predicates.add(cb.like(cb.lower(root.get("name")), "%" + filter.name().toLowerCase() + "%"));
-            }
+	    if (StringUtils.isNotBlank(filter.name())) {
+		predicates.add(cb.like(cb.lower(root.get("name")), "%" + filter.name().toLowerCase() + "%"));
+	    }
 
-            if (StringUtils.isNotBlank(filter.email())) {
-                predicates.add(cb.like(cb.lower(root.get("email")), "%" + filter.email().toLowerCase() + "%"));
-            }
+	    if (StringUtils.isNotBlank(filter.email())) {
+		predicates.add(cb.like(cb.lower(root.get("email")), "%" + filter.email().toLowerCase() + "%"));
+	    }
 
-            if (StringUtils.isNotBlank(filter.cellphone())) {
-                predicates.add(cb.equal(root.get("cellphone"), filter.cellphone()));
-            }
+	    if (StringUtils.isNotBlank(filter.cellphone())) {
+		predicates.add(cb.like(cb.lower(root.get("cellphone")), "%" + filter.cellphone().toLowerCase() + "%"));
+	    }
 
-            if (StringUtils.isNotBlank(filter.phone())) {
-                predicates.add(cb.equal(root.get("phone"), filter.phone()));
-            }
+	    if (StringUtils.isNotBlank(filter.phone())) {
+		predicates.add(cb.like(cb.lower(root.get("phone")), "%" + filter.phone().toLowerCase() + "%"));
+	    }
 
-            if (filter.favorite() != null) {
-                predicates.add(cb.equal(root.get("favorite"), filter.favorite()));
-            }
+	    if (filter.favorite() != null) {
+		predicates.add(cb.equal(root.get("favorite"), filter.favorite()));
+	    }
 
-            if (filter.active() != null) {
-                predicates.add(cb.equal(root.get("active"), filter.active()));
-            }
+	    if (filter.active() != null) {
+		predicates.add(cb.equal(root.get("active"), filter.active()));
+	    }
 
-            if (filter.createdAfter() != null && filter.createdBefore() != null) {
-                predicates.add(cb.between(root.get("createdAt"), filter.createdAfter(), filter.createdBefore()));
-            } else if (filter.createdAfter() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("createdAt"), filter.createdAfter()));
-            } else if (filter.createdBefore() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("createdAt"), filter.createdBefore()));
-            }
+	    if (filter.createdAfter() != null && filter.createdBefore() != null) {
+		predicates.add(cb.between(root.get("createdAt"), filter.createdAfter(), filter.createdBefore()));
+	    } else if (filter.createdAfter() != null) {
+		predicates.add(cb.greaterThanOrEqualTo(root.get("createdAt"), filter.createdAfter()));
+	    } else if (filter.createdBefore() != null) {
+		predicates.add(cb.lessThanOrEqualTo(root.get("createdAt"), filter.createdBefore()));
+	    }
 
-            predicates.add(cb.equal(root.get("user").get("identifier"), userIdentifier));
+	    predicates.add(cb.equal(root.get("user").get("identifier"), userIdentifier));
 
-            return cb.and(predicates.toArray(new Predicate[0]));
-        };
+	    return cb.and(predicates.toArray(new Predicate[0]));
+	};
     }
 }

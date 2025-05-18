@@ -123,6 +123,10 @@ public class ContactServiceImpl implements ContactService{
 
         contact.setActive(activated);
 
+        if(!activated) {
+            contact.setFavorite(false);
+        }
+        
         contactRepository.save(contact);
 
         log.info("[CONTACT][INACTIVATE][{}] Contact with identifier {} successfully inactivated.", loggedUsername, identifier);
